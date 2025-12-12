@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>通讯录管理系统</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+<div class="container">
+    <header>
+        <h1><i class="fas fa-address-book"></i> 通讯录管理系统</h1>
+        <div class="header-actions">
+            <button id="exportBtn" class="btn btn-secondary">
+                <i class="fas fa-download"></i> 导出
+            </button>
+            <label for="importFile" class="btn btn-secondary">
+                <i class="fas fa-upload"></i> 导入
+                <input type="file" id="importFile" accept=".xlsx,.xls" style="display: none;">
+            </label>
+            <button id="addContactBtn" class="btn btn-primary">
+                <i class="fas fa-plus"></i> 添加联系人
+            </button>
+        </div>
+    </header>
+
+    <div class="filter-section">
+        <div class="search-box">
+            <i class="fas fa-search"></i>
+            <input type="text" id="searchInput" placeholder="搜索联系人...">
+        </div>
+        <div class="filter-tabs">
+            <button class="filter-tab active" data-filter="all">所有联系人</button>
+            <button class="filter-tab" data-filter="favorite">
+                <i class="fas fa-star"></i> 收藏
+            </button>
+        </div>
+    </div>
+
+    <div class="contacts-grid" id="contactsContainer">
+        <!-- 联系人卡片将在这里动态生成 -->
+    </div>
+
+    <!-- 添加/编辑联系人模态框 -->
+    <div id="contactModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalTitle">添加新联系人</h2>
+                <button class="close-btn">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="contactForm">
+                    <div class="form-group">
+                        <label for="name">姓名 *</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>公司/职位</label>
+                        <div class="form-row">
+                            <input type="text" id="company" name="company" placeholder="公司">
+                            <input type="text" id="position" name="position" placeholder="职位">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>联系方式</label>
+                        <div id="contactMethods">
+                            <div class="contact-method">
+                                <select class="method-type">
+                                    <option value="phone">电话</option>
+                                    <option value="email">邮箱</option>
+                                    <option value="wechat">微信</option>
+                                    <option value="address">地址</option>
+                                </select>
+                                <input type="text" class="method-value" placeholder="联系方式">
+                                <button type="button" class="remove-method-btn" style="display: none;">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <button type="button" id="addMethodBtn" class="btn-text">
+                            <i class="fas fa-plus"></i> 添加更多联系方式
+                        </button>
+                    </div>
+
+                    <div class="form-group">
+                        <label>备注</label>
+                        <textarea id="notes" name="notes" rows="3"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="isFavorite" name="isFavorite">
+                            <span>收藏此联系人</span>
+                        </label>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-secondary close-modal">取消</button>
+                        <button type="submit" class="btn btn-primary">保存</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
